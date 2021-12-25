@@ -49,7 +49,7 @@
                     const flip = true; // whether to flip the webcam
                     webcam = new tmImage.Webcam(320, 320, flip); // width, height, flip
                     console.log("webcamセットアップ中…");
-                    await webcam.setup().then(reason => {isCameraReady = true; console.log(reason);}).catch(reason => {throw "Webカメラのセットアップに失敗しました。 (" + reason + ")"}); // request access to the webcam
+                    await webcam.setup().then(reason => {isCameraReady = true, console.log(reason)}).catch(reason => {throw "Webカメラのセットアップに失敗しました。 (" + reason + ")"}); // request access to the webcam
                     console.log("webcamセットアップ完了！");
                     console.log("webcam動作開始中…");
                     await webcam.play();
