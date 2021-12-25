@@ -96,7 +96,9 @@
                             }
                         );
                     } else if (isCameraReady && isCameraPlay) {
-                        await webcam.pause()/*
+                        await webcam.pause();
+                        isCameraPlay = false;
+                        /*
                         .then(
                             function(){
                                 isCameraPlay = false;
@@ -105,7 +107,7 @@
                             function(reason){
                                 throw "Webカメラを動作停止できませんでした。(" + reason + ")";
                             }
-                        )*/;
+                        )*/
                     }
 
                     window.requestAnimationFrame(loop);
