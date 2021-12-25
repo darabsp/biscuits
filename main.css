@@ -64,6 +64,11 @@ button{
     cursor: pointer;
 }
 
+ul{
+    padding-left: 2rem;
+    margin: 0.5rem 0;
+}
+
 .flexbox{
     display: flex;
     flex-wrap: wrap;
