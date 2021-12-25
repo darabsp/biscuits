@@ -118,7 +118,10 @@ async function loop() {
             bestPredictionProbability = prediction[i].probability;
         }
     };
-    document.getElementById("answer-container").innerhtml = "このお菓子は「" + prediction[bestPredictionIndex].className + "」でしょう。" + "<br>" + "確信率は" + prediction[bestPredictionIndex].probability.toFixed(3) * 100 + "%です。";
+    let bestClass = prediction[bestPredictionIndex].className, bestProbability = prediction[bestPredictionIndex].probability * 100;
+    let firstSentence = "このお菓子は「" + bestClass + "」でしょう。";
+    let secondSentence = "確信率は" + bestProbability.toFixed(3) + "%です。"
+    document.getElementById("answer-container").innerhtml = firstSentence + "<br>" + secondSentence;
     window.requestAnimationFrame(loop);
 }
 
