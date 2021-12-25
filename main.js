@@ -121,7 +121,7 @@ async function loop() {
     let bestClass = prediction[bestPredictionIndex].className, bestProbability = prediction[bestPredictionIndex].probability * 100;
     let firstSentence = "このお菓子は「" + bestClass + "」でしょう。";
     let secondSentence = "確信率は" + bestProbability.toFixed(3) + "%です。"
-    document.getElementById("answer-container").textContent = "確信率は" + bestProbability.toFixed(3) + "%です。";
+    document.getElementById("answer-container").textContent = firstSentence + secondSentence;
     window.requestAnimationFrame(loop);
 }
 
