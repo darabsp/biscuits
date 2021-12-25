@@ -14,7 +14,7 @@
             <button type="button" onclick="init()">スタート</button>
             <div class="flexbox">
                 <div id="webcam-container"></div>
-                <div id="label-container"></div>
+                <div id="output-container"><ul id="label-container"></ul></div>
             </div>
         </main>
 
@@ -52,7 +52,7 @@
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
                 labelContainer = document.getElementById("label-container");
                 for (let i = 0; i < maxPredictions; i++) { // and class labels
-                    labelContainer.appendChild(document.createElement("div"));
+                    labelContainer.appendChild(document.createElement("li"));
                 }
             }
 

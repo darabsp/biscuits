@@ -78,11 +78,12 @@ div#webcam-container{
     background: lightgray;
 }
 
-div#label-container{
+div#output-container{
     display: inline-block;
-    min-height: 320px;
+    min-height: 300px;
     width: 100%;
-    max-width: 660px;
-    min-width: 320px;
+    max-width: 640px;
+    min-width: 300px;
+    padding: 10px;
     background: var(--main-color-transparent);
 }
