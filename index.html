@@ -46,36 +46,61 @@
                     const modelURL = URL + "model.json";
                     const metadataURL = URL + "metadata.json";
 
-                    // load the model and metadata
-                    // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-                    // or files from your local hard drive
-                    // Note: the pose library adds "tmImage" object to your window (window.tmImage)
-                    model = await tmImage.load(modelURL, metadataURL);
-                    maxPredictions = model.getTotalClasses();
+                    if(!isCameraReady) {
+                        // load the model and metadata
+                        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+                        // or files from your local hard drive
+                        // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+                        model = await tmImage.load(modelURL, metadataURL);
+                        maxPredictions = model.getTotalClasses();
 
-                    // Convenience function to setup a webcam
-                    const flip = true; // whether to flip the webcam
-                    webcam = new tmImage.Webcam(320, 320, flip); // width, height, flip
-                    await webcam.setup()
-                    .then(
-                        function(){
-                            isCameraReady = true;
-                        }
-                    ).catch(
-                        function(reason){
-                            throw "Webカメラのセットアップに失敗しました。" + "(" + reason + ")";
-                        }
-                    ); // request access to the webcam
-                    await webcam.play()
-                    .then(
-                        function(){
-                            isCameraPlay = true;
-                        }
-                    ).catch(
-                        function(reason){
-                            throw "Webカメラを動作開始できませんでした。(" + reason + ")";
-                        }
-                    );
+                        // Convenience function to setup a webcam
+                        const flip = true; // whether to flip the webcam
+                        webcam = new tmImage.Webcam(320, 320, flip); // width, height, flip
+                        await webcam.setup()
+                        .then(
+                            function(){
+                                isCameraReady = true;
+                            }
+                        ).catch(
+                            function(reason){
+                                throw "Webカメラのセットアップに失敗しました。" + "(" + reason + ")";
+                            }
+                        ); // request access to the webcam
+                        await webcam.play()
+                        .then(
+                            function(){
+                                isCameraPlay = true;
+                            }
+                        ).catch(
+                            function(reason){
+                                throw "Webカメラを動作開始できませんでした。(" + reason + ")";
+                            }
+                        );
+                    } else if (isCameraReady && !isCameraPlay) {
+                        await webcam.play()
+                        .then(
+                            function(){
+                                isCameraPlay = true;
+                            }
+                        ).catch(
+                            function(reason){
+                                throw "Webカメラを動作開始できませんでした。(" + reason + ")";
+                            }
+                        );
+                    } else if (isCameraReady && isCameraReady) {
+                        await webcam.pause()
+                        .then(
+                            function(){
+                                isCameraPlay = false;
+                            }
+                        ).catch(
+                            function(reason){
+                                throw "Webカメラを動作停止できませんでした。(" + reason + ")";
+                            }
+                        );
+                    }
+
                     window.requestAnimationFrame(loop);
 
                     // append elements to the DOM
