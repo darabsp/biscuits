@@ -51,6 +51,11 @@ h2{
     font-size: 1.5rem;
 }
 
+p{
+    margin: 0.5rem 0;
+    line-height: 1.25rem;
+}
+
 button{
     display: block;
     height: 2.5rem;
@@ -72,8 +77,8 @@ button:disabled{
 }
 
 ul{
-    padding-left: 2rem;
     margin: 0.5rem 0;
+    padding-left: 2rem;
 }
 
 .flexbox{
@@ -98,4 +103,12 @@ div#output-container{
     min-width: 300px;
     padding: 10px;
     background: var(--main-color-transparent);
+}
+
+div#output-container > *:first-child{
+    margin-top: 0;
+}
+
+div#output-container > *:last-child{
+    margin-bottom: 0;
 }
