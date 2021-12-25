@@ -109,7 +109,19 @@ async function init() {
 
 async function loop() {
     webcam.update(); // update the webcam frame
-    await predict();
+    let prediction = await predict();
+    if (typeof debug === "undefined") { console.log(prediction); console.table(prediction); debug = true; }
+    let bestPredictionIndex = 0, bestPredictionProbability = 0;
+    for (let i = 0; i < prediction.length; i++) {
+        if (prediction[i].probability > bestPredictionProbability) {
+            bestPredictionIndex = i;
+            bestPredictionProbability = prediction[i].probability;
+        }
+    };
+    let bestClass = prediction[bestPredictionIndex].className, bestProbability = prediction[bestPredictionIndex].probability * 100;
+    let firstSentence = "このお菓子は「" + bestClass + "」でしょう。";
+    let secondSentence = "確信率は" + bestProbability.toFixed(1) + "%です。"
+    document.getElementById("answer-container").innerHTML = firstSentence + "<br>" + secondSentence;
     window.requestAnimationFrame(loop);
 }
 
@@ -122,4 +134,5 @@ async function predict() {
             prediction[i].className + ": " + prediction[i].probability.toFixed(2);
         labelContainer.childNodes[i].innerHTML = classPrediction;
     }
+    return prediction;
 }
