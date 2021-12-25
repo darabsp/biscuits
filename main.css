@@ -67,7 +67,7 @@ button{
 }
 
 button:disabled{
-    background: rgb(128, 128, 128);
+    background: lightgray;
     cursor: wait;
 }
 
