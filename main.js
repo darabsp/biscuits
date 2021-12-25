@@ -14,7 +14,7 @@ async function init() {
         if (isErrorOccurred) {
             isErrorOccurred = false;
             document.getElementById("output-container").style.backgroundColor = "";
-            document.getElementById("error-container").textContent = "";
+            document.getElementById("error-container").remove();
         }
 
         document.getElementById("control-button").disabled = true;
@@ -98,6 +98,9 @@ async function init() {
         }
         console.error(error);
         document.getElementById("output-container").style.backgroundColor = "var(--error-color-transparent)";
+        let newErrorContainer = document.createElement("p");
+        newErrorContainer.id = "error-container";
+        document.getElementById("output-container").insertBefore(newErrorContainer, document.getElementById("output-container").firstChild);
         document.getElementById("error-container").textContent = error;
     } finally {
         document.getElementById("control-button").disabled = false;
