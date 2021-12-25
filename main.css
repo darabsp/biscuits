@@ -1,6 +1,7 @@
 :root{
     --main-color: rgb(240, 240, 128);
-    --main-color-2: rgb(240, 208, 128);
+    --main-color-transparent: rgba(240, 240, 128, 0.5);
+    --sub-color: rgb(240, 208, 128);
     --shadow-color: rgba(16, 16, 16, 0.125);
     --text-heading-color: rgba(16, 16, 16, 0.875);
     --text-body-color: rgba(16, 16, 16, 0.625);
@@ -32,9 +33,9 @@ h1{
     display: block;
     margin: 0 0 1rem 0;
     border-radius: 0 1rem 1rem 0;
-    border-left: 1rem solid var(--main-color-2);
+    border-left: 1rem solid var(--sub-color);
     padding: 1rem;
-    background: var(--main-color);
+    background: repeating-linear-gradient(45deg, var(--main-color-transparent), var(--main-color-transparent) 1.5rem, transparent 1.5rem, transparent 3rem), repeating-linear-gradient(-45deg, var(--main-color-transparent), var(--main-color-transparent) 1.5rem, transparent 1.5rem, transparent 3rem);
     color: var(--text-heading-color);
     font-size: 2rem;
 }
@@ -63,18 +64,25 @@ button{
     cursor: pointer;
 }
 
-div.container{
-    margin: 1rem 0;
+.flexbox{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
 
 div#webcam-container{
-    display: block;
+    display: inline-block;
     height: 320px;
     width: 320px;
-    margin: auto;
     background: lightgray;
 }
 
 div#label-container{
-    display: block;
+    display: inline-block;
+    min-height: 320px;
+    width: 100%;
+    max-width: 660px;
+    min-width: 320px;
+    background: var(--main-color-transparent);
 }
