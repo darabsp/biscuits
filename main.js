@@ -110,7 +110,7 @@ async function init() {
 async function loop() {
     webcam.update(); // update the webcam frame
     prediction = await predict();
-    console.table(prediction);
+    if (typeof debug === "undefined") { console.log(prediction); console.table(prediction); debug = true; }
     window.requestAnimationFrame(loop);
 }
 
