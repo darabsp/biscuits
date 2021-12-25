@@ -118,9 +118,7 @@ async function loop() {
             bestPredictionProbability = prediction[i].probability;
         }
     };
-    document.getElementById("answer-container").textContent += "このお菓子は「" + prediction[bestPredictionIndex].className + "」でしょう。";
-    document.getElementById("answer-container").appendChild(document.createElement("br"));
-    document.getElementById("answer-container").textContent += "確信率は" + prediction[bestPredictionIndex].probability.toFixed(3) * 100 + "%です。";
+    document.getElementById("answer-container").innerhtml = "このお菓子は「" + prediction[bestPredictionIndex].className + "」でしょう。<br>確信率は" + prediction[bestPredictionIndex].probability.toFixed(3) * 100 + "%です。";
     window.requestAnimationFrame(loop);
 }
 
