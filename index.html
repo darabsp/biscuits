@@ -28,6 +28,7 @@
             const URL = "./my_model/";
 
             let model, webcam, labelContainer, maxPredictions;
+            let isCameraReady = false;
 
             // Load the image model and setup the webcam
             async function init() {
@@ -57,6 +58,7 @@
             }
 
             async function loop() {
+                console.log("looping");
                 webcam.update(); // update the webcam frame
                 await predict();
                 window.requestAnimationFrame(loop);
