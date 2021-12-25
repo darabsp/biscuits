@@ -14,7 +14,11 @@
             <button type="button" onclick="init()">スタート</button>
             <div class="flexbox">
                 <div id="webcam-container"></div>
-                <div id="output-container"><ul id="label-container"></ul></div>
+                <div id="output-container">
+                    <p id="error-container"></p>
+                    <p id="answer-container"></p>
+                    <ul id="label-container"></ul>
+                </div>
             </div>
         </main>
 
@@ -28,6 +32,7 @@
             const URL = "./my_model/";
 
             let model, webcam, labelContainer, maxPredictions;
+            let isErrorOccurred = false;
             let isCameraReady = false, isCameraPlay = false;
 
             // Load the image model and setup the webcam
@@ -83,7 +88,10 @@
                         labelContainer.appendChild(document.createElement("li"));
                     }
                 } catch(error) {
+                    isErrorOccurred = true;
                     console.log(error);
+                    document.getElementById("output-container").style.backgroundColor = "var(--error-color-transparent)";
+                    document.getElementById("error-container").textContent = error;
                 }
             }
 
