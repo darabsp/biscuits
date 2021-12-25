@@ -66,6 +66,11 @@ button{
     cursor: pointer;
 }
 
+button:disabled{
+    background: rgb(128, 128, 128);
+    cursor: wait;
+}
+
 ul{
     padding-left: 2rem;
     margin: 0.5rem 0;
