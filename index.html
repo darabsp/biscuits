@@ -89,7 +89,7 @@
                             }
                         );
                     } else if (isCameraReady && isCameraPlay) {
-                        await webcam.pause()
+                        await webcam.pause()/*
                         .then(
                             function(){
                                 isCameraPlay = false;
@@ -98,7 +98,7 @@
                             function(reason){
                                 throw "Webカメラを動作停止できませんでした。(" + reason + ")";
                             }
-                        );
+                        )*/;
                     }
 
                     window.requestAnimationFrame(loop);
@@ -114,7 +114,7 @@
                     if(typeof error === "undefined"){
                         error = "エラーが発生しました。(undefined)";
                     }
-                    console.log(error);
+                    console.error(error);
                     document.getElementById("output-container").style.backgroundColor = "var(--error-color-transparent)";
                     document.getElementById("error-container").textContent = error;
                 }
