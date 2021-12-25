@@ -109,8 +109,18 @@ async function init() {
 
 async function loop() {
     webcam.update(); // update the webcam frame
-    prediction = await predict();
+    let prediction = await predict();
     if (typeof debug === "undefined") { console.log(prediction); console.table(prediction); debug = true; }
+    let bestPredictionIndex = 0, bestPredictionProbability = 0;
+    for (let i = 0; i < prediction.length; i++) {
+        if (prediction[i].probability > bestPredictionProbability) {
+            bestPredictionIndex = i;
+            bestPredictionProbability = prediction[i].probability;
+        }
+    };
+    document.getElementById("answer-container").textContent = "このお菓子は「" + prediction[bestPredictionIndex].className + "」でしょう。";
+    document.getElementById("answer-container").appendChild(document.createElement("br"));
+    document.getElementById("answer-container").textContent = "確信率は" + prediction[bestPredictionIndex].probability.toFixed(3) * 100 + "%です。";
     window.requestAnimationFrame(loop);
 }
 
