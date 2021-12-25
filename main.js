@@ -4,20 +4,27 @@
 // the link to your model provided by Teachable Machine export panel
 const URL = "./my_model/";
 
-let model, webcam, labelContainer, maxPredictions;
+let model, webcam, maxPredictions;
 let isErrorOccurred = false;
 let isCameraReady = false, isCameraPlay = false;
+
+const controlButton = document.getElementById("control-button");
+const webcamContainer = document.getElementById("webcam-container");
+const outputContainer = document.getElementById("output-container");
+const errorContainer = document.getElementById("error-container");
+const answerContainer = document.getElementById("answer-container");
+const labelContainer = document.getElementById("label-container");
 
 // Load the image model and setup the webcam
 async function init() {
     try {
         if (isErrorOccurred) {
             isErrorOccurred = false;
-            document.getElementById("output-container").style.backgroundColor = "";
-            document.getElementById("error-container").remove();
+            outputContainer.style.backgroundColor = "";
+            errorContainer.remove();
         }
 
-        document.getElementById("control-button").disabled = true;
+        controlButton.disabled = true;
 
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
@@ -47,7 +54,7 @@ async function init() {
                 .then(
                     function() {
                         isCameraPlay = true;
-                        document.getElementById("control-button").textContent = "一時停止";
+                        controlButton.textContent = "一時停止";
                     }
                 ).catch(
                     function(reason) {
@@ -56,8 +63,7 @@ async function init() {
                 );
 
             // append elements to the DOM
-            document.getElementById("webcam-container").appendChild(webcam.canvas);
-            labelContainer = document.getElementById("label-container");
+            webcamContainer.appendChild(webcam.canvas);
             for (let i = 0; i < maxPredictions; i++) { // and class labels
                 labelContainer.appendChild(document.createElement("li"));
             }
@@ -66,7 +72,7 @@ async function init() {
                 .then(
                     function() {
                         isCameraPlay = true;
-                        document.getElementById("control-button").textContent = "一時停止";
+                        controlButton.textContent = "一時停止";
                     }
                 ).catch(
                     function(reason) {
@@ -76,7 +82,7 @@ async function init() {
         } else if (isCameraReady && isCameraPlay) {
             await webcam.pause();
             isCameraPlay = false;
-            document.getElementById("control-button").textContent = "再開";
+            controlButton.textContent = "再開";
             /*
             .then(
                 function(){
@@ -97,13 +103,13 @@ async function init() {
             error = "エラーが発生しました。(undefined)";
         }
         console.error(error);
-        document.getElementById("output-container").style.backgroundColor = "var(--error-color-transparent)";
+        outputContainer.style.backgroundColor = "var(--error-color-transparent)";
         let newErrorContainer = document.createElement("p");
         newErrorContainer.id = "error-container";
-        document.getElementById("output-container").insertBefore(newErrorContainer, document.getElementById("output-container").firstChild);
-        document.getElementById("error-container").textContent = error;
+        outputContainer.insertBefore(newErrorContainer, outputContainer.firstChild);
+        errorContainer.textContent = error;
     } finally {
-        document.getElementById("control-button").disabled = false;
+        controlButton.disabled = false;
     }
 }
 
@@ -121,7 +127,7 @@ async function loop() {
     let bestClass = prediction[bestPredictionIndex].className, bestProbability = prediction[bestPredictionIndex].probability * 100;
     let firstSentence = "このお菓子は「" + bestClass + "」でしょう。";
     let secondSentence = "確率は" + bestProbability.toFixed(1) + "%です。"
-    document.getElementById("answer-container").innerHTML = firstSentence + "<br>" + secondSentence;
+    answerContainer.innerHTML = firstSentence + "<br>" + secondSentence;
     window.requestAnimationFrame(loop);
 }
 
