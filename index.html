@@ -38,6 +38,11 @@
             // Load the image model and setup the webcam
             async function init() {
                 try{
+                    if(isErrorOccurred){
+                        isErrorOccurred = false;
+                        document.getElementById("output-container").style.backgroundColor = "";
+                        document.getElementById("error-container").textContent = "";
+                    }
                     const modelURL = URL + "model.json";
                     const metadataURL = URL + "metadata.json";
 
