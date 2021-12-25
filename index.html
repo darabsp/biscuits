@@ -88,7 +88,7 @@
                                 throw "Webカメラを動作開始できませんでした。(" + reason + ")";
                             }
                         );
-                    } else if (isCameraReady && isCameraReady) {
+                    } else if (isCameraReady && isCameraPlay) {
                         await webcam.pause()
                         .then(
                             function(){
