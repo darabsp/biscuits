@@ -77,6 +77,13 @@
                                 throw "Webカメラを動作開始できませんでした。(" + reason + ")";
                             }
                         );
+
+                        // append elements to the DOM
+                        document.getElementById("webcam-container").appendChild(webcam.canvas);
+                        labelContainer = document.getElementById("label-container");
+                        for (let i = 0; i < maxPredictions; i++) { // and class labels
+                            labelContainer.appendChild(document.createElement("li"));
+                        }
                     } else if (isCameraReady && !isCameraPlay) {
                         await webcam.play()
                         .then(
@@ -103,12 +110,6 @@
 
                     window.requestAnimationFrame(loop);
 
-                    // append elements to the DOM
-                    document.getElementById("webcam-container").appendChild(webcam.canvas);
-                    labelContainer = document.getElementById("label-container");
-                    for (let i = 0; i < maxPredictions; i++) { // and class labels
-                        labelContainer.appendChild(document.createElement("li"));
-                    }
                 } catch(error) {
                     isErrorOccurred = true;
                     if(typeof error === "undefined"){
