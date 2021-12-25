@@ -11,7 +11,7 @@
         <main>
             <h1>お菓子判別機</h1>
             <p>お店で売っているいろんなお菓子を判別してみよう！</p>
-            <button type="button" onclick="init()">スタート</button>
+            <button id="control-button" type="button" onclick="init()">スタート</button>
             <div class="flexbox">
                 <div id="webcam-container"></div>
                 <div id="output-container">
@@ -43,6 +43,9 @@
                         document.getElementById("output-container").style.backgroundColor = "";
                         document.getElementById("error-container").textContent = "";
                     }
+
+                    document.getElementById("control-button").disabled = true;
+
                     const modelURL = URL + "model.json";
                     const metadataURL = URL + "metadata.json";
 
@@ -71,6 +74,7 @@
                         .then(
                             function(){
                                 isCameraPlay = true;
+                                document.getElementById("control-button").textContent = "一時停止";
                             }
                         ).catch(
                             function(reason){
@@ -89,6 +93,7 @@
                         .then(
                             function(){
                                 isCameraPlay = true;
+                                document.getElementById("control-button").textContent = "一時停止";
                             }
                         ).catch(
                             function(reason){
@@ -98,6 +103,7 @@
                     } else if (isCameraReady && isCameraPlay) {
                         await webcam.pause();
                         isCameraPlay = false;
+                        document.getElementById("control-button").textContent = "再開";
                         /*
                         .then(
                             function(){
@@ -120,6 +126,8 @@
                     console.error(error);
                     document.getElementById("output-container").style.backgroundColor = "var(--error-color-transparent)";
                     document.getElementById("error-container").textContent = error;
+                } finally {
+                    document.getElementById("control-button").disabled = false;
                 }
             }
 
