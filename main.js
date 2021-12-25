@@ -14,7 +14,7 @@ async function init() {
         if (isErrorOccurred) {
             isErrorOccurred = false;
             document.getElementById("output-container").style.backgroundColor = "";
-            document.getElementById("error-container").remove;
+            document.getElementById("error-container").remove();
         }
 
         document.getElementById("control-button").disabled = true;
