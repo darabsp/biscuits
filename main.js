@@ -21,10 +21,10 @@ async function init() {
         if (isErrorOccurred) {
             isErrorOccurred = false;
             outputContainer.style.backgroundColor = "";
-            errorContainer.disabled = true;
+            errorContainer.remove();
         }
 
-        controlButton.setAttribute("disabled");
+        controlButton.setAttribute("disabled", true);
 
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
@@ -106,10 +106,10 @@ async function init() {
         outputContainer.style.backgroundColor = "var(--error-color-transparent)";
         let newErrorContainer = document.createElement("p");
         newErrorContainer.id = "error-container";
-        outputContainer.insertBefore(newErrorContainer, outputContainer.firstChild);
+        errorContainer = outputContainer.insertBefore(newErrorContainer, outputContainer.firstChild);
         errorContainer.textContent = error;
     } finally {
-        controlButton.disabled = false;
+        controlButton.removeAttribute("disabled");
     }
 }
 
