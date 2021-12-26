@@ -8,12 +8,12 @@ let model, webcam, maxPredictions;
 let isErrorOccurred = false;
 let isCameraReady = false, isCameraPlay = false;
 
-const controlButton = document.getElementById("control-button");
-const webcamContainer = document.getElementById("webcam-container");
-const outputContainer = document.getElementById("output-container");
-const errorContainer = document.getElementById("error-container");
-const answerContainer = document.getElementById("answer-container");
-const labelContainer = document.getElementById("label-container");
+let controlButton = document.getElementById("control-button");
+let webcamContainer = document.getElementById("webcam-container");
+let outputContainer = document.getElementById("output-container");
+let errorContainer = document.getElementById("error-container");
+let answerContainer = document.getElementById("answer-container");
+let labelContainer = document.getElementById("label-container");
 
 // Load the image model and setup the webcam
 async function init() {
