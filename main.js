@@ -24,7 +24,7 @@ async function init() {
             errorContainer.remove();
         }
 
-        controlButton.setAttribute("disabled", true);
+        controlButton.disabled = true;
 
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
@@ -109,7 +109,7 @@ async function init() {
         errorContainer = outputContainer.insertBefore(newErrorContainer, outputContainer.firstChild);
         errorContainer.textContent = error;
     } finally {
-        controlButton.removeAttribute("disabled");
+        controlButton.disabled = false;
     }
 }
 
