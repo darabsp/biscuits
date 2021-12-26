@@ -40,6 +40,7 @@ async function init() {
             // Convenience function to setup a webcam
             const flip = true; // whether to flip the webcam
             webcam = new tmImage.Webcam(320, 320, flip); // width, height, flip
+
             await webcam.setup()
                 .then(
                     function() {
@@ -50,6 +51,7 @@ async function init() {
                         throw "Webカメラのセットアップに失敗しました。" + "(" + reason + ")";
                     }
                 ); // request access to the webcam
+
             await webcam.play()
                 .then(
                     function() {
@@ -116,7 +118,6 @@ async function init() {
 async function loop() {
     webcam.update(); // update the webcam frame
     let prediction = await predict();
-    if (typeof debug === "undefined") { console.log(prediction); console.table(prediction); debug = true; }
     let bestPredictionIndex = 0, bestPredictionProbability = 0;
     for (let i = 0; i < prediction.length; i++) {
         if (prediction[i].probability > bestPredictionProbability) {
