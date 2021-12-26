@@ -21,7 +21,7 @@ async function init() {
         if (isErrorOccurred) {
             isErrorOccurred = false;
             outputContainer.style.backgroundColor = "";
-            errorContainer.remove();
+            errorContainer.disabled = true;
         }
 
         controlButton.setAttribute("disabled");
@@ -109,7 +109,7 @@ async function init() {
         outputContainer.insertBefore(newErrorContainer, outputContainer.firstChild);
         errorContainer.textContent = error;
     } finally {
-        controlButton.removeAttribute("disabled");
+        controlButton.disabled = false;
     }
 }
 
